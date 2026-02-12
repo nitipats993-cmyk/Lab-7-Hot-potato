@@ -10,7 +10,7 @@ int main(){
 
     cout << "Enter the number of people: ";//To allocate how many people playing in the game.
     cin >> N;
-    cout << "Enter the passed counts: ";// To allocate how many 
+    cout << "Enter the passed counts: ";// To allocate how many counts before a person is eliminated.
     cin >> M;
 
     for(int i=0; i<N; i++){ // Allocating how many people playing in the game.
@@ -21,22 +21,22 @@ int main(){
 
     while(people.size() > 1){
         for(int j=0; j < M; j++){
-            potato++;
-            if(potato == people.end()){//If the potato reaches the last person, then that person would be the first one in the next round.
-                potato = people.begin();
+            potato++;//Passing the potato to the next person.
+            if(potato == people.end()){//If the potato reaches the last person,
+                potato = people.begin();//then that person would be the first one in the next round.
             }
-            if(j == M-1){
-                passed.push_back(*potato);//
-                people.erase(potato++);
+            if(j == M-1){//When the passing counts reach M, the person holding the potato is eliminated.
+                passed.push_back(*potato);//Recording the order of elimination.
+                potato = people.erase(potato);//Eliminating the person holding the potato.
             }
         }
     }
     cout << "The people who have been eliminated in order: ";
-    for(auto p : passed){
+    for(auto p : passed){//Output the order of elimination.
         cout << p << " ";
     }
     cout << endl;
     cout << "The last person standing is: " << people.front() << endl;
-    return 0;
-  }
+    return 0; 
+}
 
